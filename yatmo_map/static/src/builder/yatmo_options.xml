@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+<!-- Options of the Yatmo Map block. Every value left empty follows the site settings. No custom
+     action: the builder restarts the block's interaction when an attribute changes. -->
+<t t-name="yatmo_map.YatmoMapOption">
+    <BuilderRow label.translate="Address" tooltip.translate="Found by Yatmo in the country of the block" preview="false">
+        <BuilderTextInput dataAttributeAction="'yatmoAddress'" placeholder.translate="Rue de la Loi 16, 1000 Bruxelles"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Latitude" preview="false">
+        <BuilderTextInput dataAttributeAction="'yatmoLatitude'" placeholder="'50.8461'"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Longitude" preview="false">
+        <BuilderTextInput dataAttributeAction="'yatmoLongitude'" placeholder="'4.3664'"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Country" tooltip.translate="Two-letter code: BE, FR, UK..." preview="false">
+        <BuilderTextInput dataAttributeAction="'yatmoCountry'" placeholder.translate="Site default"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Language" tooltip.translate="EN, FR, NL..." preview="false">
+        <BuilderTextInput dataAttributeAction="'yatmoLanguage'" placeholder.translate="Page language"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Layout" preview="false">
+        <BuilderSelect dataAttributeAction="'yatmoMode'" preview="false">
+            <BuilderSelectItem dataAttributeActionValue="''">Site default</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'overlay'">Map + summary</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'overlay-scores'">Map + Yatmo scores</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'map-top'">Map above the summary</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'map'">Map only</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'summary'">Summary only</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'summary-tabs'">Summary only, in tabs</BuilderSelectItem>
+        </BuilderSelect>
+    </BuilderRow>
+    <BuilderRow label.translate="Height" preview="false">
+        <BuilderTextInput dataAttributeAction="'yatmoHeight'" placeholder="'560 or 70vh'"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Zoom" preview="false">
+        <BuilderTextInput dataAttributeAction="'yatmoZoom'" placeholder="'7 to 20'"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Map style" preview="false">
+        <BuilderSelect dataAttributeAction="'yatmoMapStyle'" preview="false">
+            <BuilderSelectItem dataAttributeActionValue="''">Site default</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'1'">Style 1</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'2'">Style 2</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'3'">Style 3</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'4'">Style 4</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'5'">Style 5</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'6'">Style 6</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'7'">Style 7</BuilderSelectItem>
+        </BuilderSelect>
+    </BuilderRow>
+    <BuilderRow label.translate="Accent colour" preview="false">
+        <BuilderTextInput dataAttributeAction="'yatmoAccentColor'" placeholder="'#428BFF'"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Rounded corners" preview="false">
+        <BuilderTextInput dataAttributeAction="'yatmoRounded'" placeholder="'0 to 15'"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Marker" preview="false">
+        <BuilderSelect dataAttributeAction="'yatmoMarker'" preview="false">
+            <BuilderSelectItem dataAttributeActionValue="''">Site default</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'pin'">Pin (exact location)</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'circle'">Circle (hides the exact address)</BuilderSelectItem>
+        </BuilderSelect>
+    </BuilderRow>
+    <BuilderRow label.translate="Circle radius" tooltip.translate="Metres, 50 to 2000" preview="false">
+        <BuilderTextInput dataAttributeAction="'yatmoCircleRadius'" placeholder="'500'"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Isochrones" preview="false">
+        <BuilderSelect dataAttributeAction="'yatmoIsochrone'" preview="false">
+            <BuilderSelectItem dataAttributeActionValue="''">Site default</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'off'">Off</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'left'">Panel on the left</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'right'">Panel on the right</BuilderSelectItem>
+        </BuilderSelect>
+    </BuilderRow>
+    <BuilderRow label.translate="Routes" preview="false">
+        <BuilderSelect dataAttributeAction="'yatmoRouteFrom'" preview="false">
+            <BuilderSelectItem dataAttributeActionValue="''">Site default</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'off'">Off</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'left'">Panel on the left</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'right'">Panel on the right</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'popup'">Place popup only</BuilderSelectItem>
+        </BuilderSelect>
+    </BuilderRow>
+</t>
+
+<!-- Options of the Yatmo Text block: every change regenerates the text (yatmoRefreshText). -->
+<t t-name="yatmo_map.YatmoTextOption">
+    <BuilderRow label.translate="Address" tooltip.translate="Found by Yatmo in the country of the block" action="'yatmoRefreshText'" preview="false">
+        <BuilderTextInput dataAttributeAction="'yatmoAddress'" placeholder.translate="Rue de la Loi 16, 1000 Bruxelles"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Latitude" action="'yatmoRefreshText'" preview="false">
+        <BuilderTextInput dataAttributeAction="'yatmoLatitude'" placeholder="'50.8461'"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Longitude" action="'yatmoRefreshText'" preview="false">
+        <BuilderTextInput dataAttributeAction="'yatmoLongitude'" placeholder="'4.3664'"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Country" tooltip.translate="Two-letter code: BE, FR, UK..." action="'yatmoRefreshText'" preview="false">
+        <BuilderTextInput dataAttributeAction="'yatmoCountry'" placeholder.translate="Site default"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Language" tooltip.translate="EN, FR, NL..." action="'yatmoRefreshText'" preview="false">
+        <BuilderTextInput dataAttributeAction="'yatmoLanguage'" placeholder.translate="Page language"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Paragraphs" tooltip.translate="Comma-separated among education, shopping, publictransports, transports, tourism, cities. Empty = site default." action="'yatmoRefreshText'" preview="false">
+        <BuilderTextInput dataAttributeAction="'yatmoParagraphs'" placeholder="'education,shopping,...'"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Heading level" preview="false">
+        <BuilderSelect dataAttributeAction="'yatmoHeading'" action="'yatmoRefreshText'" preview="false">
+            <BuilderSelectItem dataAttributeActionValue="''">Site default</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'h2'">H2</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'h3'">H3</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'h4'">H4</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'h5'">H5</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'h6'">H6</BuilderSelectItem>
+        </BuilderSelect>
+    </BuilderRow>
+    <BuilderRow label.translate="Street in heading" preview="false">
+        <BuilderSelect dataAttributeAction="'yatmoStreetInTitle'" action="'yatmoRefreshText'" preview="false">
+            <BuilderSelectItem dataAttributeActionValue="''">Site default</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'1'">Shown</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'0'">Hidden</BuilderSelectItem>
+        </BuilderSelect>
+    </BuilderRow>
+    <BuilderRow label.translate="City in heading" preview="false">
+        <BuilderSelect dataAttributeAction="'yatmoCityInTitle'" action="'yatmoRefreshText'" preview="false">
+            <BuilderSelectItem dataAttributeActionValue="''">Site default</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'1'">Shown</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'0'">Hidden</BuilderSelectItem>
+        </BuilderSelect>
+    </BuilderRow>
+    <BuilderRow label.translate="Text" preview="false">
+        <BuilderButton action="'yatmoRefreshText'" preview="false" type="'success'" className="'o_we_no_toggle'" title.translate="Generate the text again for the current location and options">
+            Refresh the text
+        </BuilderButton>
+    </BuilderRow>
+</t>
+
+</templates>

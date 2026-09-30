@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Building blocks of the website builder (Odoo 19 and 20). Their options are in
+        static/src/builder/ (Owl templates + plugin).
+
+        s_yatmo_map: the section only carries data-yatmo-* attributes; the iframe is mounted at page
+        load by the interaction (static/src/snippets/s_yatmo_map/yatmo_map.js), which asks
+        /yatmo_map/embed for the URL. The licence key therefore never sits in the saved page.
+
+        s_yatmo_text: the neighbourhood text is fetched in the editor (yatmo_options_plugin.js,
+        /yatmo_map/text) and written into the section as plain HTML, so the saved page carries it and
+        search engines index it. It is regenerated when an option changes and on the "Refresh" button.
+    -->
+    <template id="s_yatmo_map" name="Yatmo Map">
+        <section class="s_yatmo_map pt24 pb24" data-name="Yatmo Map" data-yatmo-address="">
+            <div class="container">
+                <div class="s_yatmo_map_embed o_not_editable"/>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_yatmo_text" name="Yatmo Text">
+        <section class="s_yatmo_text pt24 pb24" data-name="Yatmo Text" data-yatmo-address="">
+            <div class="container">
+                <div class="s_yatmo_text_notice o_not_editable d-none" style="padding:1em;border:1px dashed #d63638;color:#1d2327;background:#fff"/>
+                <div class="s_yatmo_text_body o_not_editable"/>
+            </div>
+        </section>
+    </template>
+
+    <template id="snippets" inherit_id="website.snippets" name="Yatmo snippets">
+        <xpath expr="//t[@t-snippet='website.s_text_image']" position="after">
+            <t t-snippet="yatmo_map.s_yatmo_map" string="Yatmo Map" label="Yatmo Map" group="content" t-thumbnail="/yatmo_map/static/src/img/s_yatmo_map.svg" t-image-preview="/yatmo_map/static/src/img/s_yatmo_map.svg">
+                <keywords>yatmo, map, neighbourhood, real estate, property, listing, points of interest, travel time</keywords>
+            </t>
+            <t t-snippet="yatmo_map.s_yatmo_text" string="Yatmo Text" label="Yatmo Text" group="text" t-thumbnail="/yatmo_map/static/src/img/s_yatmo_text.svg" t-image-preview="/yatmo_map/static/src/img/s_yatmo_text.svg">
+                <keywords>yatmo, text, neighbourhood, seo, real estate, property, listing, description</keywords>
+            </t>
+        </xpath>
+    </template>
+
+</odoo>

@@ -1,0 +1,127 @@
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan">Yatmo Neighbourhood Map</h2>
+        <h3 class="oe_slogan">Map, points of interest, travel times and an indexable neighbourhood text on your property pages</h3>
+        <div class="oe_span12">
+            <p class="oe_mt32">
+                Yatmo gives real estate websites neighbourhood intelligence: schools, shops, public transport,
+                healthcare and more around each property, with real travel times on foot, by bike, by car and by
+                public transport, and a written summary of the area.
+            </p>
+            <p>
+                This module brings Yatmo to your Odoo website with two building blocks and two QWeb templates:
+            </p>
+            <ul>
+                <li><strong>Yatmo Map</strong>: the interactive Yatmo widget (map, places, travel times, summary).
+                    Choose the layout and the look in the block options; the module builds the embed.</li>
+                <li><strong>Yatmo Text</strong>: a written description of the neighbourhood (schools, shops, public
+                    transport, roads, leisure, nearby cities), written into the page as ordinary headings and
+                    paragraphs, so search engines and AI assistants read it as part of your listing.</li>
+            </ul>
+            <p>
+                <strong>A Yatmo licence key is required.</strong> Yatmo is a paid service for real estate portals,
+                agency networks and developers. <a href="https://yatmo.com" target="_blank">Contact us</a> to get a
+                key; the module displays nothing to visitors until a key is entered.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan">Building blocks</h2>
+        <div class="oe_span6">
+            <img class="oe_picture oe_screenshot" src="screenshot-map.png" alt="Map and neighbourhood summary on a property page"/>
+        </div>
+        <div class="oe_span6">
+            <p class="oe_mt32">
+                Drag the <strong>Yatmo Map</strong> block onto a page, type the property address (or its
+                coordinates), and pick the layout: map with summary, map with Yatmo scores, map above the summary,
+                map only, summary only, summary in tabs. Isochrones, routes, pin or discreet circle, colours and
+                zoom are in the same panel. Everything left out follows the site defaults.
+            </p>
+        </div>
+    </div>
+    <div class="oe_row oe_spaced">
+        <div class="oe_span6">
+            <p class="oe_mt32">
+                The <strong>Yatmo Text</strong> block writes the neighbourhood description into the page itself,
+                styled by your theme: choose the paragraphs, the heading level, and whether the street and city
+                names appear in the headings. The text exists in the languages of the property's country.
+            </p>
+        </div>
+        <div class="oe_span6">
+            <img class="oe_picture oe_screenshot" src="screenshot-text.png" alt="Neighbourhood text on a property page"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan">Pages generated from your records</h2>
+        <div class="oe_span12">
+            <p class="oe_mt32">
+                For property pages rendered from your own model (or from products), call the templates from your
+                QWeb views. Everything is rendered on the server, cached, and indexable:
+            </p>
+            <pre>
+&lt;t t-set="yatmo" t-value="{'latitude': property.latitude, 'longitude': property.longitude}"/&gt;
+&lt;t t-call="yatmo_map.map"/&gt;
+
+&lt;t t-set="yatmo" t-value="{'address': property.street + ', ' + property.city, 'paragraphs': 'education,shopping'}"/&gt;
+&lt;t t-call="yatmo_map.text"/&gt;</pre>
+            <p>
+                Python: <code>env['yatmo.map'].render_map(values)</code>, <code>render_text(values)</code>,
+                <code>build_params(values)</code> and <code>geocode(address, country, key)</code>.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan">Features</h2>
+        <div class="oe_span12">
+            <ul>
+                <li><strong>Site defaults</strong> in Website &gt; Configuration &gt; Settings &gt; Yatmo: key, country, language, layout, look, modules, text.</li>
+                <li><strong>Six layouts</strong>, discreet circle instead of a pin, isochrones (5, 10, 20 minutes), routes to any place the visitor clicks.</li>
+                <li><strong>Favourite addresses</strong>: logged-in visitors save their home or office and see their own commute from every property.</li>
+                <li><strong>Multilingual</strong>: 23 languages; by default the widget follows the language of the page.</li>
+                <li><strong>Geocoding</strong> of addresses by Yatmo, cached for 90 days; the neighbourhood text is cached for 30 days.</li>
+                <li><strong>Cookieless and lightweight</strong>: one lazy-loaded iframe for the map, plain HTML for the text.</li>
+            </ul>
+            <p>
+                <strong>Countries</strong>: Albania, Australia, Austria, Belgium, Bosnia and Herzegovina, Bulgaria, Canada, Croatia,
+                Cyprus, France, Germany, Greece, Ireland, Italy, Luxembourg, Malta, Montenegro, Morocco, the Netherlands, Portugal,
+                Serbia, Slovenia, Spain, Switzerland and the United Kingdom.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan">External services</h2>
+        <div class="oe_span12">
+            <p class="oe_mt32">
+                This module relies on Yatmo, a third-party service operated by Yatmo SRL, to display its content and to locate addresses.
+            </p>
+            <ul>
+                <li><strong>Yatmo widget</strong> (<code>https://map.yatmo.com/plugin.html</code>): every page with a Yatmo Map block or
+                    template embeds this page in an iframe, with your licence key, the country, the language, the display options and the
+                    property coordinates. When favourite addresses are enabled, it also receives an anonymous identifier of the
+                    logged-in visitor (a hash of the Odoo user id) and the addresses that visitor saves.</li>
+                <li><strong>Yatmo neighbourhood text</strong> (<code>https://&lt;country&gt;.yatmo.com/Summary/text</code>): for each property,
+                    your server sends the property coordinates and your licence key, and stores the returned text for 30 days.</li>
+                <li><strong>Yatmo geocoder</strong> (<code>https://&lt;country&gt;.yatmo.com/Geolocation</code>): when a block or template
+                    is given an address instead of coordinates, your server sends that address, the country and your licence key once,
+                    and stores the result for 90 days.</li>
+            </ul>
+            <p>
+                Yatmo sets no cookies. <a href="https://yatmo.com/terms" target="_blank">Terms of service</a>,
+                <a href="https://yatmo.com/privacy" target="_blank">privacy policy</a>,
+                <a href="https://documentation.yatmo.com/plugins/odoo" target="_blank">documentation</a>.
+            </p>
+        </div>
+    </div>
+</section>
