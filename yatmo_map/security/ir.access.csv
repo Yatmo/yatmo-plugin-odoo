@@ -1,0 +1,2 @@
+id,name,model_id,group_id/id,operation,domain
+access_yatmo_map_cache_system,yatmo.map.cache system,yatmo.map.cache,base.group_system,crud,

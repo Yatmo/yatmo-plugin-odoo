@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        QWeb templates for pages generated from your own records (a property model, a product...),
+        the counterpart of the WordPress shortcodes. Everything is rendered on the server:
+
+            <t t-set="yatmo" t-value="{'latitude': property.latitude, 'longitude': property.longitude, 'mode': 'map'}"/>
+            <t t-call="yatmo_map.map"/>
+            <t t-set="yatmo" t-value="{'address': property.street + ', ' + property.city, 'paragraphs': 'education,shopping'}"/>
+            <t t-call="yatmo_map.text"/>
+
+        Set "yatmo" before the t-call, not inside it: since Odoo 20 a t-set inside the t-call body no
+        longer reaches the called template. Keys of the "yatmo" dict: address, latitude, longitude, country, language, mode, marker,
+        circle_radius, custom_marker_url, custom_marker_width, custom_marker_height, map_style,
+        accent_color, zoom, height, rounded, isochrone, route_from, summary_background_color,
+        summary_line_color, title, css_class; for the text: paragraphs, heading, street_in_title,
+        city_in_title. Everything left out comes from the settings.
+    -->
+    <template id="map" name="Yatmo neighbourhood map">
+        <t t-set="yatmo_env" t-value="env if env else request.env"/>
+        <t t-out="yatmo_env['yatmo.map'].render_map(yatmo or {})"/>
+    </template>
+
+    <template id="text" name="Yatmo neighbourhood text">
+        <t t-set="yatmo_env" t-value="env if env else request.env"/>
+        <t t-out="yatmo_env['yatmo.map'].render_text(yatmo or {})"/>
+    </template>
+</odoo>

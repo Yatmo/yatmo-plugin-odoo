@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Odoo 20: options are attached to their blocks in the website.BuilderOptions template.
+     (Odoo 19 uses the builder_options resource instead: see Plugins/Odoo/overlay-19.0.) -->
+<templates xml:space="preserve">
+<t t-inherit="website.BuilderOptions" t-inherit-mode="extension">
+    <xpath expr="//t[@id='snippet_specific_options']" position="after">
+        <yatmo_map_option template="yatmo_map.YatmoMapOption" selector=".s_yatmo_map"/>
+        <yatmo_text_option template="yatmo_map.YatmoTextOption" selector=".s_yatmo_text"/>
+    </xpath>
+</t>
+</templates>
