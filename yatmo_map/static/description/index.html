@@ -65,12 +65,11 @@
                 QWeb views. Everything is rendered on the server, cached, and indexable:
             </p>
             <pre>
-&lt;t t-call="yatmo_map.map"&gt;
-    &lt;t t-set="yatmo" t-value="{'latitude': property.latitude, 'longitude': property.longitude}"/&gt;
-&lt;/t&gt;
-&lt;t t-call="yatmo_map.text"&gt;
-    &lt;t t-set="yatmo" t-value="{'address': property.street + ', ' + property.city, 'paragraphs': 'education,shopping'}"/&gt;
-&lt;/t&gt;</pre>
+&lt;t t-set="yatmo" t-value="{'latitude': property.latitude, 'longitude': property.longitude}"/&gt;
+&lt;t t-call="yatmo_map.map"/&gt;
+
+&lt;t t-set="yatmo" t-value="{'address': property.street + ', ' + property.city, 'paragraphs': 'education,shopping'}"/&gt;
+&lt;t t-call="yatmo_map.text"/&gt;</pre>
             <p>
                 Python: <code>env['yatmo.map'].render_map(values)</code>, <code>render_text(values)</code>,
                 <code>build_params(values)</code> and <code>geocode(address, country, key)</code>.
