@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Building blocks of the website builder (Odoo 17 and 18).
+
+        s_yatmo_map: the section only carries data-yatmo-* attributes; the iframe is mounted at page
+        load by the public widget (static/src/snippets/s_yatmo_map/000.js), which asks /yatmo_map/embed
+        for the URL. The licence key therefore never sits in the saved page.
+
+        s_yatmo_text: the neighbourhood text is fetched in the editor (options.js, /yatmo_map/text)
+        and written into the section as plain HTML, so the saved page carries it and search engines
+        index it. It is regenerated when an option changes and on the "Refresh" button.
+    -->
+    <template id="s_yatmo_map" name="Yatmo Map">
+        <section class="s_yatmo_map pt24 pb24" data-name="Yatmo Map" data-yatmo-address="">
+            <div class="container">
+                <div class="s_yatmo_map_embed o_not_editable"/>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_yatmo_text" name="Yatmo Text">
+        <section class="s_yatmo_text pt24 pb24" data-name="Yatmo Text" data-yatmo-address="">
+            <div class="container">
+                <div class="s_yatmo_text_notice o_not_editable d-none" style="padding:1em;border:1px dashed #d63638;color:#1d2327;background:#fff"/>
+                <div class="s_yatmo_text_body o_not_editable"/>
+            </div>
+        </section>
+    </template>
+
+    <template id="snippets" inherit_id="website.snippets" name="Yatmo snippets">
+        <xpath expr="//t[@t-snippet='website.s_text_image']" position="after">
+            <t t-snippet="yatmo_map.s_yatmo_map" string="Yatmo Map" t-thumbnail="/yatmo_map/static/src/img/s_yatmo_map.svg" group="content"/>
+            <t t-snippet="yatmo_map.s_yatmo_text" string="Yatmo Text" t-thumbnail="/yatmo_map/static/src/img/s_yatmo_text.svg" group="text"/>
+        </xpath>
+    </template>
+
+    <template id="snippet_options" inherit_id="website.snippet_options" name="Yatmo snippet options">
+        <xpath expr="." position="inside">
+            <!-- Shared by both blocks: the property location, country and language. -->
+            <div data-js="YatmoLocation" data-selector=".s_yatmo_map, .s_yatmo_text" string="Yatmo">
+                <we-input string="Address" data-attribute-name="yatmoAddress" data-select-data-attribute="" placeholder="Rue de la Loi 16, 1000 Bruxelles" data-no-preview="true"/>
+                <we-input string="Latitude" data-attribute-name="yatmoLatitude" data-select-data-attribute="" placeholder="50.8461" data-no-preview="true"/>
+                <we-input string="Longitude" data-attribute-name="yatmoLongitude" data-select-data-attribute="" placeholder="4.3664" data-no-preview="true"/>
+                <we-input string="Country" data-attribute-name="yatmoCountry" data-select-data-attribute="" placeholder="Site default" data-no-preview="true" title="Two-letter code: BE, FR, UK..."/>
+                <we-input string="Language" data-attribute-name="yatmoLanguage" data-select-data-attribute="" placeholder="Page language" data-no-preview="true" title="EN, FR, NL..."/>
+            </div>
+
+            <div data-js="YatmoMap" data-selector=".s_yatmo_map" string="Yatmo Map">
+                <we-select string="Layout" data-attribute-name="yatmoMode" data-no-preview="true">
+                    <we-button data-select-data-attribute="">Site default</we-button>
+                    <we-button data-select-data-attribute="overlay">Map + summary</we-button>
+                    <we-button data-select-data-attribute="overlay-scores">Map + Yatmo scores</we-button>
+                    <we-button data-select-data-attribute="map-top">Map above the summary</we-button>
+                    <we-button data-select-data-attribute="map">Map only</we-button>
+                    <we-button data-select-data-attribute="summary">Summary only</we-button>
+                    <we-button data-select-data-attribute="summary-tabs">Summary only, in tabs</we-button>
+                </we-select>
+                <we-input string="Height" data-attribute-name="yatmoHeight" data-select-data-attribute="" placeholder="560 or 70vh" data-no-preview="true"/>
+                <we-input string="Zoom" data-attribute-name="yatmoZoom" data-select-data-attribute="" placeholder="7 to 20" data-no-preview="true"/>
+                <we-select string="Map style" data-attribute-name="yatmoMapStyle" data-no-preview="true">
+                    <we-button data-select-data-attribute="">Site default</we-button>
+                    <we-button data-select-data-attribute="1">Style 1</we-button>
+                    <we-button data-select-data-attribute="2">Style 2</we-button>
+                    <we-button data-select-data-attribute="3">Style 3</we-button>
+                    <we-button data-select-data-attribute="4">Style 4</we-button>
+                    <we-button data-select-data-attribute="5">Style 5</we-button>
+                    <we-button data-select-data-attribute="6">Style 6</we-button>
+                    <we-button data-select-data-attribute="7">Style 7</we-button>
+                </we-select>
+                <we-input string="Accent colour" data-attribute-name="yatmoAccentColor" data-select-data-attribute="" placeholder="#428BFF" data-no-preview="true"/>
+                <we-input string="Rounded corners" data-attribute-name="yatmoRounded" data-select-data-attribute="" placeholder="0 to 15" data-no-preview="true"/>
+                <we-select string="Marker" data-attribute-name="yatmoMarker" data-no-preview="true">
+                    <we-button data-select-data-attribute="">Site default</we-button>
+                    <we-button data-select-data-attribute="pin">Pin (exact location)</we-button>
+                    <we-button data-select-data-attribute="circle">Circle (hides the exact address)</we-button>
+                </we-select>
+                <we-input string="Circle radius" data-attribute-name="yatmoCircleRadius" data-select-data-attribute="" placeholder="500" data-no-preview="true"/>
+                <we-select string="Isochrones" data-attribute-name="yatmoIsochrone" data-no-preview="true">
+                    <we-button data-select-data-attribute="">Site default</we-button>
+                    <we-button data-select-data-attribute="off">Off</we-button>
+                    <we-button data-select-data-attribute="left">Panel on the left</we-button>
+                    <we-button data-select-data-attribute="right">Panel on the right</we-button>
+                </we-select>
+                <we-select string="Routes" data-attribute-name="yatmoRouteFrom" data-no-preview="true">
+                    <we-button data-select-data-attribute="">Site default</we-button>
+                    <we-button data-select-data-attribute="off">Off</we-button>
+                    <we-button data-select-data-attribute="left">Panel on the left</we-button>
+                    <we-button data-select-data-attribute="right">Panel on the right</we-button>
+                    <we-button data-select-data-attribute="popup">Place popup only</we-button>
+                </we-select>
+            </div>
+
+            <div data-js="YatmoText" data-selector=".s_yatmo_text" string="Yatmo Text">
+                <we-input string="Paragraphs" data-attribute-name="yatmoParagraphs" data-select-data-attribute="" placeholder="education,shopping,..." data-no-preview="true" title="Comma-separated among education, shopping, publictransports, transports, tourism, cities. Empty = site default."/>
+                <we-select string="Heading level" data-attribute-name="yatmoHeading" data-no-preview="true">
+                    <we-button data-select-data-attribute="">Site default</we-button>
+                    <we-button data-select-data-attribute="h2">H2</we-button>
+                    <we-button data-select-data-attribute="h3">H3</we-button>
+                    <we-button data-select-data-attribute="h4">H4</we-button>
+                    <we-button data-select-data-attribute="h5">H5</we-button>
+                    <we-button data-select-data-attribute="h6">H6</we-button>
+                </we-select>
+                <we-select string="Street in heading" data-attribute-name="yatmoStreetInTitle" data-no-preview="true">
+                    <we-button data-select-data-attribute="">Site default</we-button>
+                    <we-button data-select-data-attribute="1">Shown</we-button>
+                    <we-button data-select-data-attribute="0">Hidden</we-button>
+                </we-select>
+                <we-select string="City in heading" data-attribute-name="yatmoCityInTitle" data-no-preview="true">
+                    <we-button data-select-data-attribute="">Site default</we-button>
+                    <we-button data-select-data-attribute="1">Shown</we-button>
+                    <we-button data-select-data-attribute="0">Hidden</we-button>
+                </we-select>
+                <we-button data-refresh-text="true" data-no-preview="true" class="o_we_bg_success">Refresh the text</we-button>
+            </div>
+        </xpath>
+    </template>
+</odoo>
