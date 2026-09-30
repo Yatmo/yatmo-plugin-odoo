@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.yatmo_map</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="website.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//app[@name='website']" position="inside">
+                <block title="Yatmo neighbourhood map" name="yatmo_map_settings" help="Site-wide defaults of the Yatmo building blocks and templates. Every block or template can override them.">
+                    <setting id="yatmo_map_account" string="Account" help="Your Yatmo frontend key, the one locked to your domains. Never enter your backend key here.">
+                        <div class="row mt8">
+                            <label for="yatmo_license_key" class="col-lg-4 o_light_label"/>
+                            <field name="yatmo_license_key" class="col-lg-8"/>
+                        </div>
+                        <div class="row">
+                            <label for="yatmo_country" class="col-lg-4 o_light_label"/>
+                            <field name="yatmo_country" class="col-lg-8"/>
+                        </div>
+                        <div class="row">
+                            <label for="yatmo_language" class="col-lg-4 o_light_label"/>
+                            <field name="yatmo_language" class="col-lg-8"/>
+                        </div>
+                        <div class="mt8">
+                            <a href="https://documentation.yatmo.com/plugins/odoo" target="_blank" class="oe_link"><i class="oi oi-arrow-right"/> Documentation</a>
+                        </div>
+                    </setting>
+                    <setting id="yatmo_map_display" string="Map display" help="Layout and look of the map block.">
+                        <div class="row mt8">
+                            <label for="yatmo_mode" class="col-lg-4 o_light_label"/>
+                            <field name="yatmo_mode" class="col-lg-8"/>
+                        </div>
+                        <div class="row">
+                            <label for="yatmo_height" class="col-lg-4 o_light_label"/>
+                            <field name="yatmo_height" class="col-lg-8"/>
+                        </div>
+                        <div class="row">
+                            <label for="yatmo_zoom" class="col-lg-4 o_light_label"/>
+                            <field name="yatmo_zoom" class="col-lg-8"/>
+                        </div>
+                        <div class="row">
+                            <label for="yatmo_map_style" class="col-lg-4 o_light_label"/>
+                            <field name="yatmo_map_style" class="col-lg-8"/>
+                        </div>
+                        <div class="row">
+                            <label for="yatmo_accent_color" class="col-lg-4 o_light_label"/>
+                            <field name="yatmo_accent_color" class="col-lg-8"/>
+                        </div>
+                        <div class="row">
+                            <label for="yatmo_rounded" class="col-lg-4 o_light_label"/>
+                            <field name="yatmo_rounded" class="col-lg-8"/>
+                        </div>
+                        <div class="row">
+                            <label for="yatmo_marker" class="col-lg-4 o_light_label"/>
+                            <field name="yatmo_marker" class="col-lg-8"/>
+                        </div>
+                        <div class="row">
+                            <label for="yatmo_circle_radius" class="col-lg-4 o_light_label"/>
+                            <field name="yatmo_circle_radius" class="col-lg-8"/>
+                        </div>
+                    </setting>
+                    <setting id="yatmo_map_modules" string="Modules" help="Optional modules of the map: isochrones, routes and favourite addresses.">
+                        <div class="row mt8">
+                            <label for="yatmo_isochrone" class="col-lg-4 o_light_label"/>
+                            <field name="yatmo_isochrone" class="col-lg-8"/>
+                        </div>
+                        <div class="row">
+                            <label for="yatmo_route_from" class="col-lg-4 o_light_label"/>
+                            <field name="yatmo_route_from" class="col-lg-8"/>
+                        </div>
+                        <div class="row">
+                            <label for="yatmo_favorites" class="col-lg-4 o_light_label"/>
+                            <field name="yatmo_favorites" class="col-lg-8"/>
+                        </div>
+                        <div class="text-muted">Favourite addresses are for sites where visitors have an account.</div>
+                    </setting>
+                    <setting id="yatmo_map_text" string="Neighbourhood text" help="Written description of the neighbourhood, written into the page itself so search engines index it.">
+                        <div class="mt8">Paragraphs (none ticked = all):</div>
+                        <div class="row">
+                            <div class="col-lg-6"><field name="yatmo_text_education"/> <label for="yatmo_text_education"/></div>
+                            <div class="col-lg-6"><field name="yatmo_text_shopping"/> <label for="yatmo_text_shopping"/></div>
+                            <div class="col-lg-6"><field name="yatmo_text_publictransports"/> <label for="yatmo_text_publictransports"/></div>
+                            <div class="col-lg-6"><field name="yatmo_text_transports"/> <label for="yatmo_text_transports"/></div>
+                            <div class="col-lg-6"><field name="yatmo_text_tourism"/> <label for="yatmo_text_tourism"/></div>
+                            <div class="col-lg-6"><field name="yatmo_text_cities"/> <label for="yatmo_text_cities"/></div>
+                        </div>
+                        <div class="row mt8">
+                            <label for="yatmo_text_heading" class="col-lg-4 o_light_label"/>
+                            <field name="yatmo_text_heading" class="col-lg-8"/>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12"><field name="yatmo_text_hide_street"/> <label for="yatmo_text_hide_street"/></div>
+                            <div class="col-lg-12"><field name="yatmo_text_hide_city"/> <label for="yatmo_text_hide_city"/></div>
+                        </div>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>
